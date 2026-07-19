@@ -1,4 +1,4 @@
-**I built a self-updating Excel console that consolidates the leads and revenue produced by marketing campaigns run across multiple divisions, and reports them on two dashboards that rebuild themselves from a single set of daily inputs**
+**Built a self-updating Excel console that consolidates the leads and revenue produced by marketing campaigns run across multiple divisions, and reports them on two dashboards that rebuild themselves from a single set of daily inputs**
 
 **This replace scattered, manually maintained spreadsheets with one centralised source of information, so the Brand and Marketing division can see at any moment which campaigns are generating demand, which are generating revenue, and how each is trending month on month and quarter on quarter.**
 
