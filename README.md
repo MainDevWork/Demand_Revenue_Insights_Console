@@ -4,6 +4,26 @@ An Excel reporting console that consolidates the leads and revenue produced by m
 
 It was built for the **Marketing & Corporate Affairs** division, which runs campaigns on behalf of other divisions and had no single, comparable view of how any of them were performing.
 
+## What the dashboards report
+
+Two dashboards, both read-only, both built from the same two tables of daily inputs.
+
+### Tracking dashboard
+
+![Tracking dashboard](docs/images/tracking_dashboard.png)
+
+*Current month, current quarter and year-to-date totals for every business group, with month-to-month and quarter-to-quarter movements coloured green for growth and red for decline. The month name at the top left is today's month, so the sheet is always current without anyone adjusting it.*
+
+The percentages compare a period to date against the full previous period, which is why a quarter that has only just begun shows steep negatives. The sheet carries a footnote saying so, because that is the most easily misread thing on it.
+
+### Analysis dashboard
+
+![Analysis dashboard](docs/images/analysis_dashboard.png)
+
+*KPI tiles, monthly trend lines per business group, year-to-date contribution, cumulative revenue and quarterly revenue. Every business group keeps the same colour on every chart, so the views can be read together.*
+
+The trend lines stop at the current month rather than dropping to zero for months that have not happened yet. That is deliberate. The engine returns `NA()` for future months, which tells Excel to break the line instead of plotting a false floor.
+
 **A note on the data.** Every figure in this repository is generated. It exists to populate the workbook and demonstrate that the reporting works, and it contains no real campaign results. Only the numbers are invented. The workbook itself, meaning its sheets, formulas, validation, dashboards and charts, is the one that was built for the division.
 
 ---
@@ -26,26 +46,6 @@ Each team kept its own record of what those campaigns produced, which created th
 - **Performance lived in separate files.** Every team recorded its leads and revenue in its own format and on its own schedule, so no single view of campaign performance existed.
 - **Reporting was manual and repetitive.** Each month-end summary was rebuilt by hand, which repeated effort and invited error.
 - **Definitions were inconsistent.** "This month" and "quarter to date" meant different things in different files, so the numbers did not reconcile.
-
-## What it does
-
-Two dashboards, both read-only, both built from the same two tables of daily inputs.
-
-### Tracking dashboard
-
-Current month, current quarter and year-to-date totals for every business group, with month-to-month and quarter-to-quarter movements coloured green for growth and red for decline. The month name at the top left is today's month, so the sheet is always current without anyone adjusting it.
-
-![Tracking dashboard](docs/images/tracking_dashboard.png)
-
-The percentages compare a period to date against the full previous period, which is why a quarter that has only just begun shows steep negatives. The sheet carries a footnote saying so, because that is the most easily misread thing on it.
-
-### Analysis dashboard
-
-KPI tiles, monthly trend lines per business group, year-to-date contribution, cumulative revenue and quarterly revenue. Every business group keeps the same colour on every chart, so the views can be read together.
-
-![Analysis dashboard](docs/images/analysis_dashboard.png)
-
-The trend lines stop at the current month rather than dropping to zero for months that have not happened yet. That is deliberate. The engine returns `NA()` for future months, which tells Excel to break the line instead of plotting a false floor.
 
 ## How it is built
 
