@@ -1,5 +1,3 @@
-# Demand & Revenue Insights Console
-
 An Excel reporting console that consolidates the leads and revenue produced by marketing campaigns run across several JSE divisions, and reports them on two dashboards that rebuild themselves from a single set of daily inputs.
 
 It was built for the **Marketing & Corporate Affairs** division, which runs campaigns on behalf of other divisions and had no single, comparable view of how any of them were performing.
