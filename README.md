@@ -1,115 +1,144 @@
-An Excel reporting console that consolidates the leads and revenue produced by marketing campaigns run across several JSE divisions, and reports them on two dashboards that rebuild themselves from a single set of daily inputs.
+# Demand & Revenue Insights Console
 
-It was built for the **Marketing & Corporate Affairs** division, which runs campaigns on behalf of other divisions and had no single, comparable view of how any of them were performing.
+**One Excel workbook that reports the leads and the revenue of 8 business groups on two dashboards, calculated from a single row typed per team per day, with no formula edited by anyone using it.**
 
-## What the dashboards report
+The Marketing & Corporate Affairs division of the Johannesburg Stock Exchange runs campaigns on behalf of other divisions. On the revenue side those divisions are Primary Markets, Secondary Markets, Information Services and Issuer Services. On the demand side the teams are JSE SheInvests, Digital Marketing, Events and Marketing Services. Each of them wanted to know how its campaigns were performing this month against last month, this quarter against last quarter, and for the year so far.
 
-Two dashboards, both read-only, both built from the same two tables of daily inputs.
+Three things prevented that. Each team recorded its own results in its own file and its own format, so no comparable view across the eight groups existed. Every month-end summary was assembled by hand, which repeated the same work and allowed mistakes into it. And the periods themselves were defined differently in different files, so "this month" and "quarter to date" did not mean the same thing twice, and the totals did not reconcile.
 
-### Tracking dashboard
+This workbook replaces all of that. A team enters one row per day: the date, its business group, its campaign, and the day's figure. Every total, percentage, chart and summary tile on the two dashboards is calculated from those rows. The period boundaries are worked out from the computer's own date, so opening the file in a new month moves every comparison forward without anyone touching it.
 
-![Tracking dashboard](docs/images/tracking_dashboard.png)
+|              8              |              2              |                 6                 |             382             |
+| :--------------------------: | :-------------------------: | :--------------------------------: | :--------------------------: |
+| Business groups reported | Sheets anyone types into | Charts calculated from those sheets | Rows of sample daily input |
 
-*Current month, current quarter and year-to-date totals for every business group, with month-to-month and quarter-to-quarter movements coloured green for growth and red for decline. The month name at the top left is today's month, so the sheet is always current without anyone adjusting it.*
+## Start Here
 
-The percentages compare a period to date against the full previous period, which is why a quarter that has only just begun shows steep negatives. The sheet carries a footnote saying so, because that is the most easily misread thing on it.
+| File                                                                                                   | What it is                                                                                                                                                              |
+| ------------------------------------------------------------------------------------------------------ | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------ |
+| [**MCA_Revenue_Demand_Generation_Report.xlsx**](MCA_Revenue_Demand_Generation_Report.xlsx) **(open this first)** | The console itself. Eight sheets: two dashboards, two calculation sheets, two input sheets, the approved value lists, and an instruction page. It opens on the instruction page |
+| [docs/images/tracking_dashboard.png](docs/images/tracking_dashboard.png)                               | The `MAIN DASHBOARD` sheet, showing month, quarter and year-to-date totals with movement percentages                                                                    |
+| [docs/images/analysis_dashboard.png](docs/images/analysis_dashboard.png)                               | The `Analysis Dashboard` sheet, showing five summary tiles and six charts                                                                                              |
+| [docs/images/demand_input.png](docs/images/demand_input.png)                                           | The `Demand_Input` sheet, which is one of the two sheets a team types into                                                                                              |
+| [docs/images/lists.png](docs/images/lists.png)                                                         | The `Lists` sheet, holding the approved business group and campaign names                                                                                               |
+| [docs/images/calculations.png](docs/images/calculations.png)                                           | The `Calculations` sheet, holding the date anchors and every figure the tracking dashboard displays                                                                     |
+| [docs/images/readme_sheet.png](docs/images/readme_sheet.png)                                           | The `ReadMe` sheet inside the workbook, which is the page a new user reads                                                                                              |
 
-### Analysis dashboard
+There is nothing to install and no external data source to connect. The workbook contains no macros, meaning no embedded program code, so it opens without a security warning.
 
-![Analysis dashboard](docs/images/analysis_dashboard.png)
+## What The Outputs Show
 
-*KPI tiles, monthly trend lines per business group, year-to-date contribution, cumulative revenue and quarterly revenue. Every business group keeps the same colour on every chart, so the views can be read together.*
+### The Tracking Dashboard
 
-The trend lines stop at the current month rather than dropping to zero for months that have not happened yet. That is deliberate. The engine returns `NA()` for future months, which tells Excel to break the line instead of plotting a false floor.
+![The MAIN DASHBOARD sheet](docs/images/tracking_dashboard.png)
 
-**A note on the data.** Every figure in this repository is generated. It exists to populate the workbook and demonstrate that the reporting works, and it contains no real campaign results. Only the numbers are invented. The workbook itself, meaning its sheets, formulas, validation, dashboards and charts, is the one that was built for the division.
+The `MAIN DASHBOARD` sheet reports the current month, the current quarter and the year so far for all eight business groups. Each figure is paired with a movement percentage: the current month against the whole of the previous month, and the current quarter against the whole of the previous quarter. Those percentages are coloured green when positive, red when negative and grey when zero, by a rule attached to the cells that reads the value and applies the colour, so nothing is coloured by hand.
 
----
+The month name in the top left corner, `July` in the screenshot, is calculated from the computer's date rather than typed. The two block totals on the right are the year-to-date figures for all four groups added together: 4,261 leads and R227,195.
 
-## What is in this repository
+A lead here means one potential customer that a campaign produced, counted on the day it was produced.
 
-| File                                                                                  | Description                                                                                                                                                          |
-| ------------------------------------------------------------------------------------- | -------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
-| [MCA_Revenue_Demand_Generation_Report.xlsx](MCA_Revenue_Demand_Generation_Report.xlsx) | The console. An eight-sheet workbook holding both dashboards, both calculation engines, the two input sheets, the reference lists and the in-workbook`ReadMe` page |
-| [docs/images/](docs/images/)                                                           | Screenshots of every sheet described below                                                                                                                           |
+The sheet has a footnote in cell B20 stating that the current month and current quarter cover the period so far, and that the movement percentages compare that partial period against a complete previous one. That is the single most easily misread thing on the page, which is why it is written on the page. It explains why every quarter-to-quarter percentage in the screenshot is steeply negative: the quarter shown had 17 days of data against a full previous quarter of 91.
 
-Everything the tool needs is in the workbook. There is nothing to install and no external data source to connect.
+### The Analysis Dashboard
 
-## The problem
+![The Analysis Dashboard sheet](docs/images/analysis_dashboard.png)
 
-Marketing & Corporate Affairs runs campaigns through several revenue-generating divisions at once. On the revenue side those are Primary Markets, Secondary Markets, Information Services and Issuer Services. On the demand side they are JSE SheInvests, Digital Marketing, Events and Marketing Services.
+The `Analysis Dashboard` sheet holds five summary tiles across the top and six charts below them. The tiles report year-to-date leads, year-to-date revenue, revenue per lead, the highest revenue month so far, and the business group with the highest revenue so far. The last two are not typed in; they are found by searching the monthly and per-group columns for the largest value and returning the label beside it.
 
-Each team kept its own record of what those campaigns produced, which created three problems:
+The six charts are monthly leads by business group, monthly revenue by business group, year-to-date leads by business group, year-to-date revenue by business group, cumulative revenue, and revenue by quarter. Each business group keeps the same colour on every chart it appears on, so the charts can be compared with one another.
 
-- **Performance lived in separate files.** Every team recorded its leads and revenue in its own format and on its own schedule, so no single view of campaign performance existed.
-- **Reporting was manual and repetitive.** Each month-end summary was rebuilt by hand, which repeated effort and invited error.
-- **Definitions were inconsistent.** "This month" and "quarter to date" meant different things in different files, so the numbers did not reconcile.
+The two monthly line charts stop at the current month instead of dropping to zero for months that have not happened yet. That is deliberate. For any month starting after today the calculation sheet returns `NA()`, a value Excel treats as "no data", and Excel breaks the line at that point rather than plotting a false zero. The quarterly chart behaves the same way, which is why Q4 is absent from the screenshot rather than shown as a bar of zero.
 
-## How it is built
+## Where The Data Comes From
 
-Three layers, arranged so that logic and presentation never interfere with each other. A user only ever types into the two green input sheets, and everything else builds itself.
+**What one row represents.** One row is one business group's total for one campaign on one day. Leads and revenue are recorded separately, on `Demand_Input` and `Revenue_Input`, because they are produced by different teams. Both sheets have the same four columns.
 
-| Layer        | Sheets                                     | What it does                                                                    |
-| ------------ | ------------------------------------------ | ------------------------------------------------------------------------------- |
-| Input        | `Demand_Input`, `Revenue_Input`        | Two structured Excel tables: date, business group, campaign/stream, daily value |
-| Engine       | `Calculations`, `Analysis_Calc`        | `SUMIFS` over the named tables, bounded by dates derived from `TODAY()`     |
-| Presentation | `MAIN DASHBOARD`, `Analysis Dashboard` | Reference the engines only, and contain no calculations of their own            |
-| Reference    | `Lists`, `ReadMe`                      | Approved values that drive the drop-downs, and an orientation page              |
+| Sheet            | Columns                                                             |
+| ---------------- | ------------------------------------------------------------------- |
+| `Demand_Input`   | `Date`, `Business Group`, `Campaign/Stream`, `Daily Leads (count)`  |
+| `Revenue_Input`  | `Date`, `Business Group`, `Campaign/Stream`, `Daily Revenue (R)`    |
+
+**Period and volume.** The rows published in this copy run from 01/01/2026 to 17/07/2026. `Demand_Input` holds 198 rows across 80 separate dates, and `Revenue_Input` holds 184 rows across 80 separate dates, so 382 rows in total. Teams do not report every day, and a day with no row counts as zero without breaking anything.
+
+![The Demand_Input sheet](docs/images/demand_input.png)
+
+**How it is entered, and the condition it is in.** Nothing is imported. Each row is typed by a person, which means the workbook has to reject a bad entry at the moment it is made rather than repair it afterwards, because there is no later stage at which anyone would notice. All four columns carry a rule that refuses an entry failing it:
+
+| Column            | Rule applied                                                                                              |
+| ----------------- | --------------------------------------------------------------------------------------------------------- |
+| `Date`            | Must be a date on or after 01/01/2020                                                                       |
+| `Business Group`  | Must be chosen from a drop-down list of the four approved names for that sheet                              |
+| `Campaign/Stream` | Must be chosen from a drop-down list of the four approved campaign names for that sheet                     |
+| Daily figure      | Leads must be a whole number of zero or more; revenue must be a number of zero or more, decimals permitted  |
+
+Each rule shows its own message when it rejects something. Entering an unapproved business group returns "Select a business group from the drop-down list. Valid values are maintained on the Lists sheet."
+
+This matters more than it first appears. A misspelled business group would not produce an error anywhere. It would simply report zero for that team on every dashboard, and nobody would find out until someone asked why a campaign had stopped producing results. The drop-down is what prevents that.
+
+The approved names are kept on one sheet, `Lists`, and referred to by the names `DemandGroups`, `DemandStreams`, `RevenueGroups` and `RevenueStreams`. A name here is a label given to a block of cells so that other parts of the workbook can refer to it by that label instead of by its position.
+
+![The Lists sheet](docs/images/lists.png)
+
+## How It Works
 
 ```
-Demand_Input  (daily leads)          Revenue_Input  (daily revenue, Rands)
-  one row per group per day             one row per group per day
-  validated at the point of entry       validated at the point of entry
-        |                                     |
-        +------------------+------------------+
-        |                                     |
-        v                                     v
-   Calculations                          Analysis_Calc
-   TODAY()-anchored SUMIFS:              monthly matrix, quarterly totals,
-   month / quarter / YTD per group       YTD contribution, KPI helpers
-        |                                     |
-        v                                     v
-   MAIN DASHBOARD                        Analysis Dashboard
-   totals, movement percentages          KPI tiles, trends, contribution,
-                                         cumulative and quarterly revenue
+Demand_Input                             Revenue_Input
+  198 rows: date, business group,          184 rows: date, business group,
+  campaign, daily leads                    campaign, daily revenue in Rand
+  every column checked on entry            every column checked on entry
+  held in the table named DemandTbl        held in the table named RevenueTbl
+        |                                        |
+        +-------------------+--------------------+
+        |                                        |
+        v                                        v
+   Calculations                             Analysis_Calc
+   Date anchors from TODAY(), then          One row per month for all 12 months,
+   current month, previous month,           quarterly totals, year-to-date share
+   current quarter, previous quarter        per business group, and the five
+   and year to date, per business group     values the summary tiles display
+        |                                        |
+        v                                        v
+   MAIN DASHBOARD                           Analysis Dashboard
+   Totals and movement percentages,         Five summary tiles and six charts
+   coloured green, red or grey
 ```
 
-### The input layer
+The three layers never mix. The two input sheets contain data and no formulas. The two calculation sheets contain every formula. The two dashboard sheets contain no calculations at all; each of their cells simply displays a cell from a calculation sheet. That separation is what allows the appearance of a dashboard to be changed without any risk to the numbers behind it, and the reverse.
 
-![Demand_Input sheet](docs/images/demand_input.png)
+Both input sheets are Excel tables, meaning a named block of rows and columns that extends when a row is added at the bottom. Every formula refers to `DemandTbl` and `RevenueTbl` by name rather than by a range of cell addresses, so a new row is included in every total automatically and no range needs widening.
 
-Both input sheets are structured Excel tables, so every formula downstream refers to `DemandTbl` and `RevenueTbl` by name and picks up new rows automatically. All four columns are validated at the point of entry:
+![The Calculations sheet](docs/images/calculations.png)
 
-| Column          | Rule                                                                                 |
-| --------------- | ------------------------------------------------------------------------------------ |
-| Date            | Must be a date, and not earlier than 2020                                            |
-| Business Group  | Drop-down, restricted to the approved list                                           |
-| Campaign/Stream | Drop-down, restricted to the approved list                                           |
-| Daily value     | Leads must be a whole number, revenue may have decimals, and neither may be negative |
+The workbook opens on its own instruction page, the `ReadMe` sheet, which sets out the tab colour convention (green tabs are for typing, blue tabs are for reading, grey tabs are never edited), the five steps for adding a row, the four rules that keep the formulas intact, and a table of five symptoms with their cause and their fix. Anyone who downloads the file has the instructions in front of them without needing anything else.
 
-Validation is what makes the automation reliable rather than merely automatic. A misspelled business group would not raise an error, it would silently report zero for that team, and nobody would notice until someone asked why a campaign had stopped producing.
+![The ReadMe sheet inside the workbook](docs/images/readme_sheet.png)
 
-The approved values live on one sheet, so the lists that drive both drop-downs and the pairings between groups and campaigns are all in a single place:
+## The Calculation Method In Full
 
-![Lists sheet](docs/images/lists.png)
+Every figure on the tracking dashboard is bounded by nine cells at the top of the `Calculations` sheet, which work out the period boundaries from the computer's date. `TODAY()` returns today's date, and the eight cells below it derive everything else from it:
 
-### The engine layer
+```excel
+B2  =TODAY()                    today's date
+B3  =MONTH(B2)                  current month as a number, 1 to 12
+B4  =YEAR(B2)                   current year
+B5  =IF(B3=1,12,B3-1)           previous month
+B6  =IF(B3=1,B4-1,B4)           the year that previous month belongs to
+B7  =ROUNDUP(B3/3,0)            current quarter, 1 to 4
+B8  =IF(B7=1,4,B7-1)            previous quarter
+B9  =IF(B7=1,B4-1,B4)           the year that previous quarter belongs to
+B10 =DATE(B4,1,1)               1 January of the current year
+```
 
-![Calculations sheet](docs/images/calculations.png)
+The year boundary is handled rather than left to fail. In January the previous month is December of the previous year, so the month and the year it belongs to both have to change, which is what cells B5 and B6 do together. Cells B8 and B9 carry Q1 back to Q4 of the previous year in the same way.
 
-The block at the top is where the whole design rests. It derives the current month, the current year, the previous month, the current and previous quarter and the year start, all from `TODAY()`. Every figure below it, and everything on the dashboard that reads from it, is bounded by those anchors rather than by a hard-coded date.
+Every figure below those anchors is a `SUMIFS` formula, which adds up the numbers in one column of a table for every row meeting a set of conditions. Each one is wrapped in `IFERROR`, which returns a chosen result instead of an error message, so a period with no prior data returns a blank or a zero rather than a division error on the face of the dashboard.
 
-### The orientation layer
+### One Figure Traced From Beginning To End
 
-![ReadMe sheet](docs/images/readme_sheet.png)
+The screenshots were taken with the workbook calculated on 29/07/2026, so `TODAY()` returned that date, cell B3 held 7 and cell B4 held 2026. Take the first line of the demand table, JSE SheInvests, and follow all six of its figures.
 
-The workbook opens on a `ReadMe` sheet that explains the tab colour convention, how to add a row, the rules that keep the formulas intact, and what to check when a number looks wrong. Anyone who downloads the file has the instructions in front of them without needing anything else.
-
-## The technique
-
-*This section is for readers who want the mechanics. Everything above stands without it.*
-
-Every figure on the tracking dashboard is a `SUMIFS` bounded by dates the workbook works out for itself. This is the current-month leads figure for one business group:
+**Current month, 191 leads.** Cell C14 adds the `Daily Leads (count)` column of `DemandTbl` for every row where the business group is JSE SheInvests and the date falls on or after 1 July 2026 and before 1 August 2026:
 
 ```excel
 =IFERROR(SUMIFS(DemandTbl[Daily Leads (count)],
@@ -118,25 +147,83 @@ Every figure on the tracking dashboard is a `SUMIFS` bounded by dates the workbo
                 DemandTbl[Date], "<"&DATE($B$4,$B$3+1,1)), 0)
 ```
 
-`$B$3` and `$B$4` are the current month and year, both read from `TODAY()`. Nothing is pinned to a specific date, so opening the workbook in a new month moves every comparison window on its own.
+Neither boundary is a typed date. The lower one is built from the current year and the current month, and the upper one from the current year and the month after it. In December that upper boundary becomes month 13, which Excel reads as January of the following year, so the formula needs no special case for the end of the year.
 
-The year boundaries are handled explicitly rather than left to fail. In January, the previous month is December of the previous year, and both the month and the year it belongs to have to change together:
+**Previous month, 188 leads.** Cell D14 is the same formula using cells B5 and B6, the previous month and the year it belongs to, in place of B3 and B4.
 
-```excel
-=IF(B3=1,12,B3-1)      previous month
-=IF(B3=1,B4-1,B4)      the year that month belongs to
-```
+**Month-to-month movement, +2%.** Cell E14 is `=IFERROR((C14-D14)/D14,"")`, so (191 - 188) / 188 = 0.0160, displayed as +2% and coloured green because it is above zero.
 
-The same pattern carries Q1 back to Q4, where the previous-quarter upper bound uses `EDATE` so the boundary lands on the right day. Every ratio is wrapped in `IFERROR`, so a period with no prior data returns a blank rather than a division error.
+**Current quarter, 191 leads.** Cell F14 runs from 1 July 2026, the first month of quarter 3, up to but not including 1 October 2026. It equals the month figure because July is the only month of that quarter with any data.
 
-**Tools:** Microsoft Excel throughout, using structured tables, named ranges, `SUMIFS` with dynamic date windows, `IFERROR` guards, `NA()` to break chart series, data validation, conditional formatting, and native charts with a fixed palette applied consistently per business group.
+**Previous quarter, 417 leads.** Cell G14 runs from 1 April 2026 to 1 July 2026. The upper boundary is `EDATE(DATE($B$9,($B$8-1)*3+1,1),3)`, where `EDATE` adds three months to a date, which lands the boundary on the correct day whichever quarter it is and whichever year that quarter belongs to. The figure is April's 87 plus May's 142 plus June's 188.
 
-## Author and contact
+**Quarter-to-quarter movement, -54%.** Cell H14 gives (191 - 417) / 417 = -0.5420, displayed as -54% and coloured red. This is the figure the footnote exists for. It compares 17 days of July against three complete months, so it is a statement about how much of the quarter has elapsed, not about performance.
+
+**Year to date, 986 leads.** Cell I14 runs from 1 January 2026 to today, and is the sum of that group's seven monthly figures: 136, 181, 61, 87, 142, 188 and 191.
+
+The tracking dashboard then displays these six cells and nothing more. Cell E8 on `MAIN DASHBOARD` contains `=Calculations!C14`, cell F8 contains `=Calculations!E14`, and so on down the block.
+
+The second calculation sheet, `Analysis_Calc`, applies the same approach across all twelve months of the year at once. Each month's cell is `=IF($B4>TODAY(),NA(),SUMIFS(...))`, so a month that has not started yet returns "no data" and the chart line breaks there instead of dropping to zero. Two further columns hold the same monthly figures with `IFERROR` converting "no data" to zero, which is what the cumulative and quarterly totals add up, so a future month contributes nothing to them rather than making them fail.
+
+## What The Published Copy Reports
+
+The figures below are what the workbook calculates from the 382 generated rows in this repository, on the 29/07/2026 calculation shown in the screenshots. They demonstrate that the reporting works and are not real campaign results.
+
+**1. Leads are evenly spread across the four demand teams.** Year to date, Events produced 1,112 leads (26.1% of the total), Marketing Services 1,088 (25.5%), Digital Marketing 1,075 (25.2%) and JSE SheInvests 986 (23.1%), giving 4,261 in total. No team is more than three percentage points from any other.
+
+**2. Revenue is more concentrated than leads.** Secondary Markets produced R65,304 (28.7%), Information Services R59,335 (26.1%), Issuer Services R53,996 (23.8%) and Primary Markets R48,560 (21.4%), giving R227,195. The gap between the highest and lowest group is R16,744.
+
+**3. Revenue per lead is R53.32.** That is R227,195 divided by 4,261, which is the only figure on either dashboard that combines the two input sheets.
+
+**4. Quarterly revenue fell after Q2, for a reason the dashboard states.** Q1 produced R78,450 and Q2 produced R104,716, an increase of R26,266. Q3 shows R44,029, but it covers 17 days rather than three months, which is why the footnote on the tracking dashboard sets out what the quarter columns compare. May was the strongest single month at R49,898.
+
+**5. The colouring separates real movement from partial-period movement.** In the month-to-month column, Issuer Services shows +200%, being R16,219 in July against R5,410 in June, and Secondary Markets shows -32%, being R7,600 against R11,136. In the quarter-to-quarter column every group is negative, because each compares 17 days against 91.
+
+## What The Division Does With It
+
+**Each team enters its own rows.** A team opens the green sheet for its measure, goes to the first empty row at the bottom, and enters four values, three of them chosen from drop-down lists. Nothing else is required of the person entering data, and nothing they do can alter a formula.
+
+**The tracking dashboard answers the monthly reporting question.** It gives the current month and quarter against the previous one for all eight groups on a single page, which is defined as a print area of A1:L32 in landscape so that it prints on one page for a meeting.
+
+**The analysis dashboard answers the direction question.** The monthly lines show which groups are rising and falling over the year, the year-to-date bars show each group's share, and the cumulative revenue line shows the year's total building month by month.
+
+**The written comment stays a human judgement.** The dashboards have headings for `Insights` and `Looking Ahead` on the tracking sheet and `Key Insights` on the analysis sheet, which are left empty in this copy. The note in cell B74 of the analysis sheet states the position directly: the commentary is written by the analyst at each monthly review, while every figure above it recalculates on its own.
+
+## Limitations And Assumptions
+
+- **The two drop-down lists are independent of each other.** The `Business Group` list and the `Campaign/Stream` list are checked separately, so an approved group can be paired with an approved campaign belonging to a different group and the workbook will accept it. The `Lists` sheet states that each business group reports under exactly one campaign, but that pairing is not enforced by a rule.
+- **The validation rules cover rows 2 to 3000.** Beyond row 3000 an entry is no longer checked. At the current rate of roughly 380 rows in seven months, that is several years of entry, but it is a fixed limit and not an unlimited one.
+- **One calendar year is reported at a time.** Every month on `Analysis_Calc` is built from the current year, so on 1 January the trend charts restart and the previous year's months are no longer displayed. The rows themselves remain in the input tables, but the workbook does not compare a month against the same month a year earlier.
+- **Year to date means from 1 January.** If the division reports on a financial year that starts in another month, the year-to-date column and the `January to date` heading would both need changing.
+- **A missing row and a genuine zero are the same thing.** A day on which a team reported nothing and a day on which a team produced nothing both contribute zero. The workbook does not distinguish between the two cases.
+- **The current month and quarter are always partial.** Every movement percentage compares an incomplete period against a complete one. This is stated on the dashboard, but it remains the figure most likely to be quoted out of context.
+- **The screenshots were taken on 29/07/2026 and the sample rows stop on 17/07/2026.** Because the period boundaries come from the computer's date, opening this copy after July 2026 will show zero for the current month until rows for that month are added. That is the workbook working correctly, not a fault.
+- **Nothing is verified against a source.** Each figure is what a team typed. The validation rules confirm that an entry is a permitted kind of value, not that it is the correct value.
+
+## Next Steps
+
+- **Make the campaign drop-down depend on the business group already chosen**, so that the one-campaign-per-group pairing stated on the `Lists` sheet is enforced rather than described.
+- **Keep the previous year's months available on the trend charts**, so that a month can be compared against the same month a year earlier as well as against the month before it.
+- **Add a completeness check** that reports how many days in the current month each business group has submitted, so that a low figure caused by missing rows can be told apart from a low figure caused by low performance.
+- **Extend or remove the row 3000 limit** on the validation rules before the input tables approach it.
+
+## About The Data
+
+**Every figure in this repository is generated.** The 198 rows in `Demand_Input` and the 184 rows in `Revenue_Input` were produced to populate the workbook and demonstrate that the reporting works, and they contain no real campaign results. Every number quoted anywhere on this page, and every number in the screenshots, comes from those generated rows.
+
+What was preserved is the structure the division actually reports on: the eight business group names, the four demand campaigns and four revenue campaigns each of them reports under, the four columns of each input sheet, and the daily granularity of entry. What was replaced is the measured quantities themselves, meaning the lead counts and the Rand amounts.
+
+The workbook records team totals for a day. It holds no personal information of any kind: no individual's name, no email address, no telephone number and no registration number appear anywhere in the file, in the published copy or in the version the division uses.
+
+Only the numbers were invented. The workbook itself, meaning its sheets, formulas, validation rules, dashboards and charts, is the one built for the division.
+
+## Author And Contact
 
 **Ndivhuwo**, design, build and documentation.
 
 - Email: [ndivhuwojse@gmail.com](mailto:ndivhuwojse@gmail.com)
 - LinkedIn: [www.linkedin.com/in/ndivhuwo-makhavhu](https://www.linkedin.com/in/ndivhuwo-makhavhu)
 - GitHub: [github.com/MainDevWork](https://github.com/MainDevWork)
+- Project: [Demand_Revenue_Insights_Console](https://github.com/MainDevWork/Demand_Revenue_Insights_Console)
 
 [**Back to the top**](#demand--revenue-insights-console)
