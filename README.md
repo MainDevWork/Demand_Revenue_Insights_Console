@@ -1,6 +1,6 @@
 # Demand & Revenue Insights Console
 
-**One Excel workbook that reports the leads and the revenue of 8 business groups on two dashboards, calculated from a single row typed per team per day, with no formula edited by anyone using it.**
+**I replaced eight teams' worth of hand-built month-end reporting with one workbook where a team types four values a day and every figure on both dashboards recalculates itself.**
 
 The Marketing & Corporate Affairs division of the Johannesburg Stock Exchange runs campaigns on behalf of other divisions. On the revenue side those divisions are Primary Markets, Secondary Markets, Information Services and Issuer Services. On the demand side the teams are JSE SheInvests, Digital Marketing, Events and Marketing Services. Each of them wanted to know how its campaigns were performing this month against last month, this quarter against last quarter, and for the year so far.
 
@@ -8,9 +8,9 @@ Three things prevented that. Each team recorded its own results in its own file 
 
 This workbook replaces all of that. A team enters one row per day: the date, its business group, its campaign, and the day's figure. Every total, percentage, chart and summary tile on the two dashboards is calculated from those rows. The period boundaries are worked out from the computer's own date, so opening the file in a new month moves every comparison forward without anyone touching it.
 
-|              8              |              2              |                 6                 |             382             |
+|              8              |              4              |                 0                 |             1             |
 | :--------------------------: | :-------------------------: | :--------------------------------: | :--------------------------: |
-| Business groups reported | Sheets anyone types into | Charts calculated from those sheets | Rows of sample daily input |
+| Business groups on one page, previously eight separate files | Values a team types per row, three of them from drop-down lists | Formulas anyone entering data can break | Date the whole workbook rolls forward from, taken from the computer itself |
 
 ## Start Here
 
@@ -219,9 +219,9 @@ Only the numbers were invented. The workbook itself, meaning its sheets, formula
 
 ## Author And Contact
 
-**Ndivhuwo**, design, build and documentation.
+**Ndivhuwo Makhavhu**, data analyst. Design, build and documentation.
 
-- Email: [ndivhuwojse@gmail.com](mailto:ndivhuwojse@gmail.com)
+- Email: [ndivhumakhavhu@gmail.com](mailto:ndivhumakhavhu@gmail.com)
 - LinkedIn: [www.linkedin.com/in/ndivhuwo-makhavhu](https://www.linkedin.com/in/ndivhuwo-makhavhu)
 - GitHub: [github.com/MainDevWork](https://github.com/MainDevWork)
 - Project: [Demand_Revenue_Insights_Console](https://github.com/MainDevWork/Demand_Revenue_Insights_Console)
