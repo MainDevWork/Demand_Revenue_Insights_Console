@@ -1,6 +1,6 @@
 # Demand & Revenue Insights Console
 
-**I replaced eight teams' worth of hand-built month-end reporting with one workbook where a team types four values a day and every figure on both dashboards recalculates itself.**
+**I replaced eight teams' worth of hand-built month-end reporting with one workbook: a team types four values a day, and every figure on its two dashboards recalculates itself.**
 
 The Marketing & Corporate Affairs division of the Johannesburg Stock Exchange runs campaigns for four revenue divisions, Primary Markets, Secondary Markets, Information Services and Issuer Services, and four demand teams, JSE SheInvests, Digital Marketing, Events and Marketing Services. Each wanted to know how its campaigns were performing this month against last month, this quarter against last quarter, and for the year so far, but each team kept its results in its own file and its own format, month-end summaries were assembled by hand, and the reporting periods were defined differently from file to file, so the totals never reconciled across the eight groups.
 
