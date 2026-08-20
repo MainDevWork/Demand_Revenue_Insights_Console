@@ -2,11 +2,9 @@
 
 **I replaced eight teams' worth of hand-built month-end reporting with one workbook where a team types four values a day and every figure on both dashboards recalculates itself.**
 
-The Marketing & Corporate Affairs division of the Johannesburg Stock Exchange runs campaigns on behalf of other divisions. On the revenue side those divisions are Primary Markets, Secondary Markets, Information Services and Issuer Services. On the demand side the teams are JSE SheInvests, Digital Marketing, Events and Marketing Services. Each of them wanted to know how its campaigns were performing this month against last month, this quarter against last quarter, and for the year so far.
+The Marketing & Corporate Affairs division of the Johannesburg Stock Exchange runs campaigns for four revenue divisions, Primary Markets, Secondary Markets, Information Services and Issuer Services, and four demand teams, JSE SheInvests, Digital Marketing, Events and Marketing Services. Each wanted to know how its campaigns were performing this month against last month, this quarter against last quarter, and for the year so far, but each team kept its results in its own file and its own format, month-end summaries were assembled by hand, and the reporting periods were defined differently from file to file, so the totals never reconciled across the eight groups.
 
-Three things prevented that. Each team recorded its own results in its own file and its own format, so no comparable view across the eight groups existed. Every month-end summary was assembled by hand, which repeated the same work and allowed mistakes into it. And the periods themselves were defined differently in different files, so "this month" and "quarter to date" did not mean the same thing twice, and the totals did not reconcile.
-
-This workbook replaces all of that. A team enters one row per day: the date, its business group, its campaign, and the day's figure. Every total, percentage, chart and summary tile on the two dashboards is calculated from those rows. The period boundaries are worked out from the computer's own date, so opening the file in a new month moves every comparison forward without anyone touching it.
+The workbook I built replaces all eight files. A team enters one row per day: the date, its business group, its campaign, and the day's figure. Every total, percentage, chart and summary tile on the two dashboards is calculated from those rows, and the period boundaries are worked out from the computer's own date, so opening the file in a new month moves every comparison forward without anyone touching it.
 
 |              8              |              4              |                 0                 |             1             |
 | :--------------------------: | :-------------------------: | :--------------------------------: | :--------------------------: |
@@ -169,43 +167,43 @@ The second calculation sheet, `Analysis_Calc`, applies the same approach across 
 
 The figures below are what the workbook calculates from the 382 generated rows in this repository, on the 29/07/2026 calculation shown in the screenshots. They demonstrate that the reporting works and are not real campaign results.
 
-**1. Leads are evenly spread across the four demand teams.** Year to date, Events produced 1,112 leads (26.1% of the total), Marketing Services 1,088 (25.5%), Digital Marketing 1,075 (25.2%) and JSE SheInvests 986 (23.1%), giving 4,261 in total. No team is more than three percentage points from any other.
+**1.** Leads are evenly spread across the four demand teams. Year to date, Events produced 1,112 leads (26.1% of the total), Marketing Services 1,088 (25.5%), Digital Marketing 1,075 (25.2%) and JSE SheInvests 986 (23.1%), giving 4,261 in total. No team is more than three percentage points from any other.
 
-**2. Revenue is more concentrated than leads.** Secondary Markets produced R65,304 (28.7%), Information Services R59,335 (26.1%), Issuer Services R53,996 (23.8%) and Primary Markets R48,560 (21.4%), giving R227,195. The gap between the highest and lowest group is R16,744.
+**2.** Revenue is more concentrated than leads. Secondary Markets produced R65,304 (28.7%), Information Services R59,335 (26.1%), Issuer Services R53,996 (23.8%) and Primary Markets R48,560 (21.4%), giving R227,195. The gap between the highest and lowest group is R16,744.
 
-**3. Revenue per lead is R53.32.** That is R227,195 divided by 4,261, which is the only figure on either dashboard that combines the two input sheets.
+**3.** Revenue per lead is R53.32, which is R227,195 divided by 4,261, the only figure on either dashboard that combines the two input sheets.
 
-**4. Quarterly revenue fell after Q2, for a reason the dashboard states.** Q1 produced R78,450 and Q2 produced R104,716, an increase of R26,266. Q3 shows R44,029, but it covers 17 days rather than three months, which is why the footnote on the tracking dashboard sets out what the quarter columns compare. May was the strongest single month at R49,898.
+**4.** Q1 produced R78,450 and Q2 produced R104,716, an increase of R26,266, but Q3 shows only R44,029 because it covers 17 days rather than three months, which is why the footnote on the tracking dashboard sets out what the quarter columns compare. May was the strongest single month at R49,898.
 
-**5. The colouring separates real movement from partial-period movement.** In the month-to-month column, Issuer Services shows +200%, being R16,219 in July against R5,410 in June, and Secondary Markets shows -32%, being R7,600 against R11,136. In the quarter-to-quarter column every group is negative, because each compares 17 days against 91.
+**5.** In the month-to-month column, Issuer Services shows +200%, R16,219 in July against R5,410 in June, and Secondary Markets shows -32%, R7,600 against R11,136. In the quarter-to-quarter column every group is negative, because each compares 17 days against 91: the colouring is separating real movement from partial-period movement, not marking underperformance.
 
 ## What The Division Does With It
 
-**Each team enters its own rows.** A team opens the green sheet for its measure, goes to the first empty row at the bottom, and enters four values, three of them chosen from drop-down lists. Nothing else is required of the person entering data, and nothing they do can alter a formula.
+Each team enters its own rows. A team opens the green sheet for its measure, goes to the first empty row at the bottom, and enters four values, three of them chosen from drop-down lists. Nothing else is required of the person entering data, and nothing they do can alter a formula.
 
-**The tracking dashboard answers the monthly reporting question.** It gives the current month and quarter against the previous one for all eight groups on a single page, which is defined as a print area of A1:L32 in landscape so that it prints on one page for a meeting.
+The tracking dashboard answers the monthly reporting question: the current month and quarter against the previous one for all eight groups on a single page, defined as a print area of A1:L32 in landscape so that it prints on one page for a meeting.
 
-**The analysis dashboard answers the direction question.** The monthly lines show which groups are rising and falling over the year, the year-to-date bars show each group's share, and the cumulative revenue line shows the year's total building month by month.
+The analysis dashboard answers the direction question. The monthly lines show which groups are rising and falling over the year, the year-to-date bars show each group's share, and the cumulative revenue line shows the year's total building month by month.
 
-**The written comment stays a human judgement.** The dashboards have headings for `Insights` and `Looking Ahead` on the tracking sheet and `Key Insights` on the analysis sheet, which are left empty in this copy. The note in cell B74 of the analysis sheet states the position directly: the commentary is written by the analyst at each monthly review, while every figure above it recalculates on its own.
+The written comment stays a human judgement. The dashboards have headings for `Insights` and `Looking Ahead` on the tracking sheet and `Key Insights` on the analysis sheet, left empty in this copy. The note in cell B74 of the analysis sheet states the position directly: the commentary is written by the analyst at each monthly review, while every figure above it recalculates on its own.
 
 ## Limitations And Assumptions
 
-- **The two drop-down lists are independent of each other.** The `Business Group` list and the `Campaign/Stream` list are checked separately, so an approved group can be paired with an approved campaign belonging to a different group and the workbook will accept it. The `Lists` sheet states that each business group reports under exactly one campaign, but that pairing is not enforced by a rule.
-- **The validation rules cover rows 2 to 3000.** Beyond row 3000 an entry is no longer checked. At the current rate of roughly 380 rows in seven months, that is several years of entry, but it is a fixed limit and not an unlimited one.
-- **One calendar year is reported at a time.** Every month on `Analysis_Calc` is built from the current year, so on 1 January the trend charts restart and the previous year's months are no longer displayed. The rows themselves remain in the input tables, but the workbook does not compare a month against the same month a year earlier.
-- **Year to date means from 1 January.** If the division reports on a financial year that starts in another month, the year-to-date column and the `January to date` heading would both need changing.
-- **A missing row and a genuine zero are the same thing.** A day on which a team reported nothing and a day on which a team produced nothing both contribute zero. The workbook does not distinguish between the two cases.
-- **The current month and quarter are always partial.** Every movement percentage compares an incomplete period against a complete one. This is stated on the dashboard, but it remains the figure most likely to be quoted out of context.
-- **The screenshots were taken on 29/07/2026 and the sample rows stop on 17/07/2026.** Because the period boundaries come from the computer's date, opening this copy after July 2026 will show zero for the current month until rows for that month are added. That is the workbook working correctly, not a fault.
-- **Nothing is verified against a source.** Each figure is what a team typed. The validation rules confirm that an entry is a permitted kind of value, not that it is the correct value.
+- The two drop-down lists are independent of each other. The `Business Group` list and the `Campaign/Stream` list are checked separately, so an approved group can be paired with an approved campaign belonging to a different group and the workbook will accept it. The `Lists` sheet states that each business group reports under exactly one campaign, but that pairing is not enforced by a rule.
+- The validation rules cover rows 2 to 3000. Beyond row 3000 an entry is no longer checked. At the current rate of roughly 380 rows in seven months, that is several years of entry, but it is a fixed limit and not an unlimited one.
+- One calendar year is reported at a time. Every month on `Analysis_Calc` is built from the current year, so on 1 January the trend charts restart and the previous year's months are no longer displayed. The rows themselves remain in the input tables, but the workbook does not compare a month against the same month a year earlier.
+- Year to date means from 1 January. If the division reports on a financial year that starts in another month, the year-to-date column and the `January to date` heading would both need changing.
+- A missing row and a genuine zero are the same thing. A day on which a team reported nothing and a day on which a team produced nothing both contribute zero; the workbook does not distinguish between the two cases.
+- The current month and quarter are always partial. Every movement percentage compares an incomplete period against a complete one. This is stated on the dashboard, but it remains the figure most likely to be quoted out of context.
+- The screenshots were taken on 29/07/2026 and the sample rows stop on 17/07/2026. Because the period boundaries come from the computer's date, opening this copy after July 2026 will show zero for the current month until rows for that month are added. That is the workbook working correctly, not a fault.
+- Nothing is verified against a source. Each figure is what a team typed. The validation rules confirm that an entry is a permitted kind of value, not that it is the correct value.
 
 ## Next Steps
 
-- **Make the campaign drop-down depend on the business group already chosen**, so that the one-campaign-per-group pairing stated on the `Lists` sheet is enforced rather than described.
-- **Keep the previous year's months available on the trend charts**, so that a month can be compared against the same month a year earlier as well as against the month before it.
-- **Add a completeness check** that reports how many days in the current month each business group has submitted, so that a low figure caused by missing rows can be told apart from a low figure caused by low performance.
-- **Extend or remove the row 3000 limit** on the validation rules before the input tables approach it.
+- Make the campaign drop-down depend on the business group already chosen, so that the one-campaign-per-group pairing stated on the `Lists` sheet is enforced rather than described.
+- Keep the previous year's months available on the trend charts, so that a month can be compared against the same month a year earlier as well as against the month before it.
+- Add a completeness check that reports how many days in the current month each business group has submitted, so that a low figure caused by missing rows can be told apart from a low figure caused by low performance.
+- Extend or remove the row 3000 limit on the validation rules before the input tables approach it.
 
 ## About The Data
 
