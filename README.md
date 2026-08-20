@@ -10,11 +10,11 @@ The workbook I built replaces all eight files. A team enters one row per day: th
 | :--------------------------: | :-------------------------: | :--------------------------------: | :--------------------------: |
 | Business groups on one page, previously eight separate files | Values a team types per row, three of them from drop-down lists | Formulas anyone entering data can break | Date the whole workbook rolls forward from, taken from the computer itself |
 
-## Start Here
+## Artifacts
 
 | File                                                                                                   | What it is                                                                                                                                                              |
 | ------------------------------------------------------------------------------------------------------ | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------ |
-| [**MCA_Revenue_Demand_Generation_Report.xlsx**](MCA_Revenue_Demand_Generation_Report.xlsx) **(open this first)** | The console itself. Eight sheets: two dashboards, two calculation sheets, two input sheets, the approved value lists, and an instruction page. It opens on the instruction page |
+| [**MCA_Revenue_Demand_Generation_Report.xlsx**](MCA_Revenue_Demand_Generation_Report.xlsx) | The console itself. Eight sheets: two dashboards, two calculation sheets, two input sheets, the approved value lists, and an instruction page. It opens on the instruction page |
 
 There is nothing to install and no external data source to connect. The workbook contains no macros, meaning no embedded program code, so it opens without a security warning.
 
